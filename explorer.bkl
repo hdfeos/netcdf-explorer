@@ -1,0 +1,18 @@
+<?xml version="1.0" ?>
+<!-- usage:$ bakefile -v -f autoconf explorer.bkl -->
+<makefile>
+    <include file="../../build/bakefiles/common_samples.bkl"/>
+    <exe id="ncexplorer" template="wx_sample" template_append="wx_append">
+        <sources>explorer.cpp</sources>
+        <include>/home/pvn/data/install/netcdf-4.3.3.1/include</include>
+        <lib-path>/home/pvn/data/install/netcdf-4.3.3.1/lib</lib-path>
+        <lib-path>/home/pvn/data/install/hdf5-1.8.15/lib</lib-path>
+        <sys-lib>netcdf</sys-lib> 
+        <sys-lib>hdf5_hl</sys-lib>
+        <sys-lib>hdf5</sys-lib>        
+        <sys-lib>curl</sys-lib>  
+        <wx-lib>adv</wx-lib>
+        <wx-lib>core</wx-lib>
+        <wx-lib>base</wx-lib>
+    </exe>
+</makefile>

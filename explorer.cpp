@@ -35,6 +35,7 @@ enum
 
 //utils
 wxString GetPathComponent(const wxString &path);
+const char * GetFormat(const nc_type typ);
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 //wxTreeItemDataExplorer
@@ -671,6 +672,15 @@ wxTreeCtrlExplorer::~wxTreeCtrlExplorer()
 void wxTreeCtrlExplorer::OnSelChanged(wxTreeEvent& event)
 {
   event.Skip();
+#ifdef _DEBUG
+  wxTreeItemId item_id = event.GetItem();
+  wxTreeItemDataExplorer *item = (wxTreeItemDataExplorer *)GetItemData(item_id);
+  if (item->m_kind != wxTreeItemDataExplorer::Variable)
+  {
+    return;
+  }
+  LoadItem(item);
+#endif
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -937,7 +947,7 @@ void wxGridLayers::ShowGrid()
     {
       for (int idx_col = 0; idx_col < m_nbr_cols; idx_col++)
       {
-        this->SetCellValue(idx_row, idx_col, wxString::Format(wxT("%g"), buf_float[idx_buf]));
+        this->SetCellValue(idx_row, idx_col, wxString::Format(GetFormat(NC_FLOAT), buf_float[idx_buf]));
         idx_buf++;
       }
     }
@@ -948,7 +958,7 @@ void wxGridLayers::ShowGrid()
     {
       for (int idx_col = 0; idx_col < m_nbr_cols; idx_col++)
       {
-        this->SetCellValue(idx_row, idx_col, wxString::Format(wxT("%.12g"), buf_double[idx_buf]));
+        this->SetCellValue(idx_row, idx_col, wxString::Format(GetFormat(NC_DOUBLE), buf_double[idx_buf]));
         idx_buf++;
       }
     }
@@ -959,7 +969,7 @@ void wxGridLayers::ShowGrid()
     {
       for (int idx_col = 0; idx_col < m_nbr_cols; idx_col++)
       {
-        this->SetCellValue(idx_row, idx_col, wxString::Format(wxT("%d"), buf_int[idx_buf]));
+        this->SetCellValue(idx_row, idx_col, wxString::Format(GetFormat(NC_INT), buf_int[idx_buf]));
         idx_buf++;
       }
     }
@@ -970,7 +980,7 @@ void wxGridLayers::ShowGrid()
     {
       for (int idx_col = 0; idx_col < m_nbr_cols; idx_col++)
       {
-        this->SetCellValue(idx_row, idx_col, wxString::Format(wxT("%d"), buf_short[idx_buf]));
+        this->SetCellValue(idx_row, idx_col, wxString::Format(GetFormat(NC_SHORT), buf_short[idx_buf]));
         idx_buf++;
       }
     }
@@ -981,7 +991,7 @@ void wxGridLayers::ShowGrid()
     {
       for (int idx_col = 0; idx_col < m_nbr_cols; idx_col++)
       {
-        this->SetCellValue(idx_row, idx_col, wxString::Format(wxT("%c"), buf_char[idx_buf]));
+        this->SetCellValue(idx_row, idx_col, wxString::Format(GetFormat(NC_CHAR), buf_char[idx_buf]));
         idx_buf++;
       }
     }
@@ -992,7 +1002,7 @@ void wxGridLayers::ShowGrid()
     {
       for (int idx_col = 0; idx_col < m_nbr_cols; idx_col++)
       {
-        this->SetCellValue(idx_row, idx_col, wxString::Format(wxT("%d"), buf_byte[idx_buf]));
+        this->SetCellValue(idx_row, idx_col, wxString::Format(GetFormat(NC_BYTE), buf_byte[idx_buf]));
         idx_buf++;
       }
     }
@@ -1003,7 +1013,7 @@ void wxGridLayers::ShowGrid()
     {
       for (int idx_col = 0; idx_col < m_nbr_cols; idx_col++)
       {
-        this->SetCellValue(idx_row, idx_col, wxString::Format(wxT("%d"), buf_ubyte[idx_buf]));
+        this->SetCellValue(idx_row, idx_col, wxString::Format(GetFormat(NC_UBYTE), buf_ubyte[idx_buf]));
         idx_buf++;
       }
     }
@@ -1014,7 +1024,7 @@ void wxGridLayers::ShowGrid()
     {
       for (int idx_col = 0; idx_col < m_nbr_cols; idx_col++)
       {
-        this->SetCellValue(idx_row, idx_col, wxString::Format(wxT("%d"), buf_ushort[idx_buf]));
+        this->SetCellValue(idx_row, idx_col, wxString::Format(GetFormat(NC_USHORT), buf_ushort[idx_buf]));
         idx_buf++;
       }
     }
@@ -1025,7 +1035,7 @@ void wxGridLayers::ShowGrid()
     {
       for (int idx_col = 0; idx_col < m_nbr_cols; idx_col++)
       {
-        this->SetCellValue(idx_row, idx_col, wxString::Format(wxT("%d"), buf_uint[idx_buf]));
+        this->SetCellValue(idx_row, idx_col, wxString::Format(GetFormat(NC_UINT), buf_uint[idx_buf]));
         idx_buf++;
       }
     }
@@ -1036,7 +1046,7 @@ void wxGridLayers::ShowGrid()
     {
       for (int idx_col = 0; idx_col < m_nbr_cols; idx_col++)
       {
-        this->SetCellValue(idx_row, idx_col, wxString::Format(wxT("%lld"), buf_int64[idx_buf]));
+        this->SetCellValue(idx_row, idx_col, wxString::Format(GetFormat(NC_INT64), buf_int64[idx_buf]));
         idx_buf++;
       }
     }
@@ -1047,7 +1057,7 @@ void wxGridLayers::ShowGrid()
     {
       for (int idx_col = 0; idx_col < m_nbr_cols; idx_col++)
       {
-        this->SetCellValue(idx_row, idx_col, wxString::Format(wxT("%llu"), buf_uint64[idx_buf]));
+        this->SetCellValue(idx_row, idx_col, wxString::Format(GetFormat(NC_UINT64), buf_uint64[idx_buf]));
         idx_buf++;
       }
     }
@@ -1058,7 +1068,7 @@ void wxGridLayers::ShowGrid()
     {
       for (int idx_col = 0; idx_col < m_nbr_cols; idx_col++)
       {
-        this->SetCellValue(idx_row, idx_col, wxString::Format(wxT("%s"), buf_string[idx_buf]));
+        this->SetCellValue(idx_row, idx_col, wxString::Format(GetFormat(NC_STRING), buf_string[idx_buf]));
         idx_buf++;
       }
     }
@@ -1105,4 +1115,54 @@ wxString GetPathComponent(const wxString &path)
 #endif
   }
   return name;
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+//GetFormat
+//Provide sprintf() format string for specified netCDF type
+//Based on NCO utilities
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+
+const char* GetFormat(const nc_type typ)
+{
+  static const char fmt_NC_FLOAT[] = "%g";
+  static const char fmt_NC_DOUBLE[] = "%.12g";
+  static const char fmt_NC_INT[] = "%i";
+  static const char fmt_NC_SHORT[] = "%hi";
+  static const char fmt_NC_CHAR[] = "%c";
+  static const char fmt_NC_BYTE[] = "%hhi";
+  static const char fmt_NC_UBYTE[] = "%hhu";
+  static const char fmt_NC_USHORT[] = "%hu";
+  static const char fmt_NC_UINT[] = "%u";
+  static const char fmt_NC_INT64[] = "%lli";
+  static const char fmt_NC_UINT64[] = "%llu";
+  static const char fmt_NC_STRING[] = "%s";
+  switch (typ)
+  {
+  case NC_FLOAT:
+    return fmt_NC_FLOAT;
+  case NC_DOUBLE:
+    return fmt_NC_DOUBLE;
+  case NC_INT:
+    return fmt_NC_INT;
+  case NC_SHORT:
+    return fmt_NC_SHORT;
+  case NC_CHAR:
+    return fmt_NC_CHAR;
+  case NC_BYTE:
+    return fmt_NC_BYTE;
+  case NC_UBYTE:
+    return fmt_NC_UBYTE;
+  case NC_USHORT:
+    return fmt_NC_USHORT;
+  case NC_UINT:
+    return fmt_NC_UINT;
+  case NC_INT64:
+    return fmt_NC_INT64;
+  case NC_UINT64:
+    return fmt_NC_UINT64;
+  case NC_STRING:
+    return fmt_NC_STRING;
+  }
+  return (char *)NULL;
 }

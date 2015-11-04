@@ -1,7 +1,7 @@
 netCDF Explorer
 ====================
 
-netCDF Explorer is multi-platfrom graphical browser for the
+netCDF Explorer is a multi-platfrom graphical browser for the
 [netCDF](http://www.unidata.ucar.edu/software/netcdf) file format,
 including 
 [DAP](http://opendap.org).

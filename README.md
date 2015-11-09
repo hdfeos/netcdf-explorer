@@ -6,7 +6,7 @@ netCDF Explorer is a multi-platfrom graphical browser for the
 including 
 [DAP](http://opendap.org).
 
-netCDF Explorer dependencies
+Dependencies
 ------------
 
 [wxWidgets](https://www.wxwidgets.org/)

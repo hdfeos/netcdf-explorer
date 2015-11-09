@@ -17,7 +17,7 @@ AC_MSG_CHECKING([wxWidgets version])
 if wxversion=`$WX_CONFIG --version`; then
     AC_MSG_RESULT([$wxversion])
 else
-    AC_MSG_ERROR([wxWidgets is required.])
+    AC_MSG_ERROR([wxWidgets not found. Try --with-wx-config.])
 fi
 WX_CPPFLAGS="`$WX_CONFIG --cppflags`"
 WX_LIBS="`$WX_CONFIG --libs`"
@@ -35,7 +35,7 @@ AC_MSG_CHECKING([netCDF version])
 if ncversion=`$NC_CONFIG --version`; then
     AC_MSG_RESULT([$ncversion])
 else
-    AC_MSG_ERROR([netCDF is required.])
+    AC_MSG_ERROR([netCDF not found. Try --with-nc-config.])
 fi
 NC_CPPFLAGS="-I`$NC_CONFIG --includedir`"
 NC_LIBS="`$NC_CONFIG --libs`"

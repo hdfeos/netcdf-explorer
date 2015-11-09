@@ -21,6 +21,8 @@ access, and sharing of array-oriented scientific data.
 
 Building from source
 ------------
+GNU autoconf is used
+
 
 Install dependency packages (Ubuntu):
 <br /> 
@@ -45,6 +47,15 @@ autoreconf -vfi
 <br /> 
 make
 <br /> 
+
+Optional for ./configure (when building wxWidgets or netCDF from source):
+<br />
+<br />
+--with-wx-config=PATH   Use the given PATH to wx-config
+<br />
+--with-nc-config=PATH   Use the given PATH to nc-config
+<br />  
+
 
 Enjoy!
 <br /> 

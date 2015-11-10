@@ -1,6 +1,6 @@
 AC_PREREQ([2.69])
 AC_INIT([ncexplorer], [1.0], [pedro.vicente@space-research.org])
-AM_INIT_AUTOMAKE
+AM_INIT_AUTOMAKE([foreign])
 AM_SILENT_RULES([no])
 AC_PROG_CXX
 

@@ -25,38 +25,27 @@ GNU autoconf is used
 
 
 Install dependency packages (Ubuntu):
-<br /> 
-
+<pre>
 sudo apt-get install libwxgtk3.0-dev
-<br /> 
 sudo apt-get install libnetcdf-dev netcdf-bin netcdf-doc
-<br /> 
+</pre>
 
-Get source:
-<br /> 
-
+Get source and switch to release branch:
+<pre>
 git clone https://github.com/pedro-vicente/netcdf-explorer.git
-<br /> 
+git checkout release
+</pre>
 
 Build with:
-<br /> 
-
-autoreconf -vfi
-<br /> 
+<pre>
 ./configure
-<br /> 
 make
-<br /> 
+</pre>
 
 Optional for ./configure (when building wxWidgets or netCDF from source):
-<br />
-<br />
+<pre>
 --with-wx-config=PATH   Use the given PATH to wx-config
-<br />
 --with-nc-config=PATH   Use the given PATH to nc-config
-<br />  
-
+</pre>
 
 Enjoy!
-<br /> 
-
